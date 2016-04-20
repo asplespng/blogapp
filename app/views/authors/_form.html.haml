@@ -4,7 +4,13 @@
   .form-inputs
     = f.input :first_name
     = f.input :last_name
-    = f.input :image, as: :file
+    .row
+      -if @author.image.exists?
+        .col-md-2{id: 'current_image'}
+          = image_tag @author.image.url(:small)
+      .col-md-10
+        - image_label = @author.image.exists? ? "Replace image" : "Image"
+        = f.input :image, as: :file, label: image_label
 
   .form-actions
     = f.button :submit
