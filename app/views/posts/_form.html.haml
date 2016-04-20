@@ -5,6 +5,11 @@
       .form-inputs
         = f.input :title
         = f.input :description
+        = f.association :author, label_method: :first_name, value_method: :id, include_blank: true
+        = f.simple_fields_for :author do |ff|
+          = ff.input :first_name
+          = ff.input :last_name
+          = ff.input :image, as: :file
       .form-inputs
         = f.button :submit, :class => 'btn-primary'
         = link_to t('.cancel', :default => t("helpers.links.cancel")), posts_path, :class => 'btn btn-default'
